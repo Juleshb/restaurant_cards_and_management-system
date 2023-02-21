@@ -1,15 +1,15 @@
 <?php
 // create a new PDO object
-$pdo = new PDO('mysql:host=localhost;dbname=my_system_dbm', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=habarurema_jules_221003981', 'root', '');
 
 // prepare the DELETE statement
-$statement = $pdo->prepare('DELETE FROM users WHERE id = :id');
+$statement = $pdo->prepare('DELETE FROM customers WHERE customerID  = :id');
 
 // bind the parameter values
 $statement->bindParam(':id', $_POST['id']);
 
 // execute the statement
 $statement->execute();
-header("Location: home.php");
+header("Location: customer.php");
 
 ?>
