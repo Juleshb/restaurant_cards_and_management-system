@@ -1,9 +1,10 @@
 <?php
+include "nav.php";
 // Connect to database
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "my_system_dbm";
+$dbname = "habarurema_jules_221003981";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // Set the PDO error mode to exception
@@ -13,7 +14,7 @@ try {
 }
 
 // Prepare and execute SELECT query
-$stmt = $conn->prepare("SELECT * FROM users WHERE id = :id");
+$stmt = $conn->prepare("SELECT * FROM customers WHERE customerID = :id");
 
 // bind the parameter values
 $stmt->bindParam(':id', $_POST['id']);
@@ -34,41 +35,41 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
   
     <!-- HTML form -->
-    <h2 id="animateHeading">Uppdate <?php echo $row['username']?>'s infromation </h2>
+    <h2 id="animateHeading">Uppdate <?php echo $row['names']?>'s infromation </h2>
     <div class="form-container" >
       <form id="contact-form" action="update1.php" method="post" >
         <div class="form-group">
-          <label for="name">Frist Name:</label>
+          <label for="name">Names:</label>
           <input
             type="text"
-            id="fname"
-            name="fname"
+            id="names"
+            name="names"
             class="form-control"
-            value="<?php echo $row['fname'];?>"
+            value="<?php echo $row['names'];?>"
            
           />
           <span class="error" id="nameError"></span>
         </div>
         <div class="form-group">
-          <label for="email">Last Name:</label>
+          <label for="email">Phone:</label>
           <input
-            type="text"
-            id="lname"
-            name="lname"
+            type="number"
+            id="phone"
+            name="phone"
             class="form-control"
-            value="<?php echo $row['lname']?>"
+            value="<?php echo $row['phone']?>"
             
           />
           <span class="error" id="emailError"></span>
         </div>
         <div class="form-group">
-            <label for="email">User Name:</label>
+            <label for="email">Address:</label>
             <input
               type="text"
-              id="username"
-              name="username"
+              id="address"
+              name="address"
               class="form-control"
-              value="<?php echo $row['username']?>"
+              value="<?php echo $row['address']?>"
               
             />
             <span class="error" id="regnumberError"></span>
@@ -83,49 +84,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
               value="<?php echo $row['email']?>"
              
             />
-            <span class="error" id="sexError"></span>
-          </div>
-          <div class="form-group">
-            <label for="email">Password:</label>
-            <input
-              type="text"
-              id="pass"
-              name="pass"
-              class="form-control"
-              value="<?php echo $row['pass']?>"
-             
-            />
-            <span class="error" id="classError"></span>
-          </div>
-          <div class="form-group">
-          <label for="email">User Role:</label>
-          <select id="u_role" name="u_role">
-          <option value="<?php echo $row['u_role']?>"><?php echo $row['u_role']?></option>
-          <option value="Adimin">Adimin</option>
-          <option value="User">User</option>
-  
-          </select>
             
-            
-          </div>
-
-          
-
-          <div class="form-group">
-          <label for="email">Activated:</label> 
-          <select id="activated" name="activated">
-          <option value="<?php echo $row['activated']?>"><?php echo $row['activated']?></option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-  
-          </select>
         
-        </option>
-            <span class="error" id="classError"></span>
-          </div>
-          
-        
-        <input type="hidden" name="id" value="<?php echo $row['ID']?>">
+        <input type="hidden" name="id" value="<?php echo $row['customerID']?>">
         <button type="submit">Uppdatte</button>
       </form>
     </div>
