@@ -20,7 +20,7 @@ if (!isset($_SESSION["Email"])) {
   <body>
   <div><a href="home.php">Home</a>
   <a  href="customer.php">Customers</a>
-  <a href="#news">Payment</a>
+  <a href="payment.php">Payment</a>
   <a href="#news">price</a>
   <a href="updateadimin.php">Profile</a>
   <a href="logout.php" class="logou">Logout</a>
