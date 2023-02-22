@@ -25,6 +25,7 @@ if ($conn->connect_error) {
 
 <table>
       <tr>
+      <th>ID</th>
         <th>Names</th>
         <th>Adress</th>
         <th>Phone</th>
@@ -45,6 +46,7 @@ if (mysqli_num_rows($result) > 0) {
   
       ?>
       <tr>
+      <td><?php echo $row["customerID"] ?></td>
         <td><?php echo $row["names"] ?></td>
         <td><?php echo $row["address"] ?></td>
         <td><?php echo $row["phone"] ?></td>

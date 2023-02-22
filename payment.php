@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 ?>
 <br>
 <br><br>
-<a href="register.php"  >new Payment</a>
+<a href="makepayment.php"  >new Payment</a>
 <div class="container">
 
 <table>
