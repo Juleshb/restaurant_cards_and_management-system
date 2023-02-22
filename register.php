@@ -20,7 +20,7 @@ include "nav.php";
             name="names"
             class="form-control"/>
 
-          <span class="error" id="nameError"></span>
+          <span class="error" id="namesError"></span>
         </div>
         <div class="form-group">
           <label for="email">Phone:</label>
@@ -30,7 +30,7 @@ include "nav.php";
             name="phone"
             class="form-control"/>
 
-          <span class="error" id="emailError"></span>
+          <span class="error" id="phonelError"></span>
         </div>
         <div class="form-group">
             <label for="email">Address:</label>
@@ -40,7 +40,7 @@ include "nav.php";
               name="address"
               class="form-control"/>
 
-            <span class="error" id="regnumberError"></span>
+            <span class="error" id="addressError"></span>
           </div>
           <div class="form-group">
             <label for="email">Password:</label>
@@ -50,7 +50,7 @@ include "nav.php";
               name="password"
               class="form-control"/>
 
-            <span class="error" id="regnumberError"></span>
+            <span class="error" id="passwordError"></span>
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
@@ -59,7 +59,8 @@ include "nav.php";
               id="email"
               name="email"
               class="form-control"/>
-          
+            <span class="error" id="emailError"></span>
+          </div>
         
         
         <button type="submit">Submit</button>
@@ -69,46 +70,46 @@ include "nav.php";
     <!-- JavaScript for form validation -->
     <script>
         function validateForm() {
-          var name = document.getElementById("name").value;
+          var names = document.getElementById("names").value;
           var email = document.getElementById("email").value;
-          var regnumber = document.getElementById("regnumber").value;
-          var sex = document.getElementById("sex").value;
-          var clas = document.getElementById("class").value;
+          var phone = document.getElementById("phone").value;
+          var address = document.getElementById("address").value;
+          var password = document.getElementById("password").value;
 
-        var nameError = document.getElementById("nameError");
+        var namesError = document.getElementById("namesError");
+        var phonelError = document.getElementById("phonelError");
+        var addressError = document.getElementById("addressError");
+        var passwordError = document.getElementById("passwordError");
         var emailError = document.getElementById("emailError");
-        var regnumberError = document.getElementById("regnumberError");
-        var sexError = document.getElementById("sexError");
-        var classError = document.getElementById("classError");
         var valid = true;
         
-        nameError.innerHTML = "";
+        namesError.innerHTML = "";
+        phonelError.innerHTML = "";
+        addressError.innerHTML = "";
+        passwordError.innerHTML = "";
         emailError.innerHTML = "";
-        regnumberError.innerHTML = "";
-        sexError.innerHTML = "";
-        classError.innerHTML = "";
           
-        if (!name) {
-          nameError.innerHTML = "Name is required";
+        if (!names) {
+          namesError.innerHTML = "your names is required";
           valid = false;
         }
         if (!email) {
           emailError.innerHTML = "Email is required";
           valid = false;
         } else if (!email.includes("@")) {
-          emailError.innerHTML = "Email is invalid";
+          emailError.innerHTML = "collect your Email";
           valid = false;
         }
-        if (!regnumber) {
-          regnumberError.innerHTML = "Regnumber is required";
+        if (!phone) {
+          phonelError.innerHTML = "Phone number is required";
           valid = false;
         }
-        if (!sex) {
-          sexError.innerHTML = "Sex is required";
+        if (!address) {
+          addressError.innerHTML = "Adress is required";
           valid = false;
         }
-        if (!clas) {
-        classError.innerHTML = "Class is required";
+        if (!password ) {
+          passwordError.innerHTML = "Class is required";
           valid = false;
         }
         //   if (valid= false){
