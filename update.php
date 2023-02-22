@@ -29,7 +29,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <html>
   <head>
     <link rel="stylesheet" href="from.css">
-   <title>Registe</title>
+   <title>Update</title>
   </head>
   <body>
 

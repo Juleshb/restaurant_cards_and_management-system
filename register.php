@@ -1,3 +1,7 @@
+<?php 
+
+include "nav.php";
+?>
 <html>
   <head>
     <link rel="stylesheet" href="from.css">
@@ -9,39 +13,43 @@
     <div class="form-container" >
       <form id="contact-form" action="insert.php" method="post" onsubmit="return validateForm()">
         <div class="form-group">
-          <label for="name">Frist Name:</label>
+        <label for="name">Names:</label>
           <input
             type="text"
-            id="fname"
-            name="fname"
-            class="form-control"
-            placeholder="Enter your name"
-           
-          />
+            id="names"
+            name="names"
+            class="form-control"/>
+
           <span class="error" id="nameError"></span>
         </div>
         <div class="form-group">
-          <label for="email">Last Name:</label>
+          <label for="email">Phone:</label>
           <input
-            type="text"
-            id="lname"
-            name="lname"
-            class="form-control"
-            placeholder="Enter your Lname"
-            
-          />
+            type="number"
+            id="phone"
+            name="phone"
+            class="form-control"/>
+
           <span class="error" id="emailError"></span>
         </div>
         <div class="form-group">
-            <label for="email">User Name:</label>
+            <label for="email">Address:</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              class="form-control"
-              placeholder="Enter your User name"
-              
-            />
+              id="address"
+              name="address"
+              class="form-control"/>
+
+            <span class="error" id="regnumberError"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"/>
+
             <span class="error" id="regnumberError"></span>
           </div>
           <div class="form-group">
@@ -50,36 +58,7 @@
               type="email"
               id="email"
               name="email"
-              class="form-control"
-              placeholder="Enter your Email"
-             
-            />
-            <span class="error" id="sexError"></span>
-          </div>
-          <div class="form-group">
-            <label for="email">Password:</label>
-            <input
-              type="password"
-              id="pass"
-              name="pass"
-              class="form-control"
-              placeholder="Enter your Password"
-             
-            />
-            <span class="error" id="classError"></span>
-          </div>
-          <div class="form-group">
-            <label for="email">User Role:</label>
-            <input
-              type="text"
-              id="u_role"
-              name="u_role"
-              class="form-control"
-              placeholder="Enter your User Role"
-             
-            />
-            <span class="error" id="classError"></span>
-          </div>
+              class="form-control"/>
           
         
         

@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "my_system_dbm";
+$dbname = "habarurema_jules_221003981";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,19 +13,19 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$fname= $_POST["fname"];
-$lname = $_POST["lname"];
-$username = $_POST["username"];
+$names= $_POST["names"];
+$phone = $_POST["phone"];
+$address= $_POST["address"];
 $email = $_POST["email"];
-$pass= $_POST["pass"];
-$u_role= $_POST["u_role"];
+$password= $_POST["password"];
 
 
 
-$sql = "INSERT INTO `users`(`fname`, `lname`, `username`, `email`, `pass`, `u_role`) VALUES('$fname', '$lname','$username','$email','$pass','$u_role')";
+
+$sql = "INSERT INTO `customers`(`names`, `phone`, `address`, `email`, `password`) VALUES('$names', '$phone','$address','$email','$password')";
 
 if ($conn->query($sql) === TRUE) {
-  header("Location: home.php");
+  header("Location: customer.php");
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
