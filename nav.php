@@ -72,6 +72,7 @@ https://templatemo.com/tm-565-onix-digital
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li class="scroll-to-section"><a href="home.php">Home</a></li>
+              <li class="scroll-to-section"><a  href="customer.php">Customers</a></li>
               <li class="scroll-to-section"><a href="payment.php">Payment</a></li>
               <li class="scroll-to-section"><a href="#news">price</a></li>
               <li class="scroll-to-section"><a href="updateadimin.php">Profile</a></li>
