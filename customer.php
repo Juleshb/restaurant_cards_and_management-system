@@ -117,7 +117,7 @@ if (mysqli_num_rows($result) > 0) {
         <td><?php echo $row["names"] ?></td>
         <td><?php echo $row["address"] ?></td>
         <td>+250<?php echo $row["phone"] ?></td>
-        <td><?php echo $row["email"] ?></td>
+        <td><?php echo $row["Email"] ?></td>
         <td><?php echo $row["registedDate"] ?></td>
         <td><form method="post" action="delete.php"><div class="main-red-button-hover" ><input type="hidden" name="id" value="<?php echo $row['customerID']?>"><input type="submit" value="Delete" ></div></form><br>
         <form method="post" action="update.php"><div class="main-red-button-hover" ><input type="hidden" name="id" value="<?php echo $row['customerID']?>"><input type="submit" value="Update" ></div></form>

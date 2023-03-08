@@ -2,19 +2,6 @@
 
 include "nav.php";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "habarurema_jules_221003981";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 ?>
 <html>
   <head>
@@ -28,26 +15,9 @@ if ($conn->connect_error) {
     <div class="form-container" >
       <form id="contact-form" action="pay.php" method="post" onsubmit="return validateForm()">
         <div class="form-group">
-        <label for="name">Customer ID:</label>
+        <label for="name">Customer ID: <?php echo $id?></label>
           
-        <select id="u_role" name="id">
-        <?php 
-$sql = "SELECT * FROM `customers`";
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-  while($row = mysqli_fetch_assoc($result)) {
-      
-  
-      ?>
-          <option value="<?php echo $row['customerID']?>"><?php echo $row['customerID']?></option>
-          <?php 
-      }
-    } else {
-      echo "0 results";
-    }
-      ?>
-          </select>
+        
           </div>
 
         <div class="form-group">
@@ -95,35 +65,8 @@ if (mysqli_num_rows($result) > 0) {
         }
     });
  
-        function validateForm() {
-          var names = document.getElementById("names").value;
-          var email = document.getElementById("email").value;
-         
-
-        var namesError = document.getElementById("namesError");
-        var phonelError = document.getElementById("phonelError");
-       
-        var valid = true;
         
-        namesError.innerHTML = "";
-        phonelError.innerHTML = "";
         
-          
-        if (!names) {
-          namesError.innerHTML = "ID is required";
-          valid = false;
-        }
-       
-        if (!phone) {
-          phonelError.innerHTML = "Amount is required";
-          valid = false;
-        }
-        
-        //   if (valid= false){
-        //     alert("Please fill requid fild")
-        //   }
-          return valid;
-        }
       </script>
 </body>
 </html>

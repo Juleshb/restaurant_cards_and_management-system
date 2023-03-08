@@ -15,14 +15,17 @@ try {
 
 // Prepare and execute SELECT query
 $stmt = $conn->prepare("SELECT * FROM customers WHERE customerID = :id");
+$stmt2 = $conn->prepare("SELECT SUM(`amount`) FROM transaction where customerID = :id");
 
 // bind the parameter values
-$stmt->bindParam(':id', $_POST['id']);
-
+$stmt->bindParam(':id', $id);
+$stmt2->bindParam(':id', $id);
 $stmt->execute();
+$stmt2->execute();
 
 // Populate input field with data
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+$row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -33,64 +36,48 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   </head>
   <body>
 
-  <br>
-  <br><br><br><br>
+  
+
+  <br><br><br><br><br>
     <!-- HTML form -->
-    <h2 id="animateHeading">Uppdate <?php echo $row['names']?>'s infromation </h2>
     <div class="form-container" >
-      <form id="contact-form" action="update1.php" method="post" >
+      <form id="contact-form" method="post" >
         <div class="form-group">
-          <label for="name">Names:</label>
-          <input
-            type="text"
-            id="names"
-            name="names"
-            class="form-control"
-            value="<?php echo $row['names'];?>"
-           
-          />
+          <label for="name"><b>Names:</b> <?php echo $row['names'];?></label>
+          
           <span class="error" id="nameError"></span>
         </div>
         <div class="form-group">
-          <label for="email">Phone:</label>
-          <input
-            type="number"
-            id="phone"
-            name="phone"
-            class="form-control"
-            value="<?php echo $row['phone']?>"
-            
-          />
+          <label for="email"><b>Total Used Amount:</b><?php echo $row2['SUM(`amount`)']?></label>
+          
           <span class="error" id="emailError"></span>
         </div>
-        <div class="form-group">
-            <label for="email">Address:</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              class="form-control"
-              value="<?php echo $row['address']?>"
-              
-            />
-            <span class="error" id="regnumberError"></span>
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form-control"
-              value="<?php echo $row['Email']?>"
-             
-            />
-            
-        
-        <input type="hidden" name="id" value="<?php echo $row['customerID']?>">
-        <button type="submit">Uppdatte</button>
+        <?php 
+    
+    $user_id = $row['customerID'];
+$stmt = $conn->prepare("SELECT * FROM transaction WHERE customerID = ?");
+$stmt->execute([$user_id]);
+$transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Format the transactions as a table
+$table_html = '<table>';
+$table_html .= '<tr><th>Date</th><th>Amount</th></tr>';
+foreach ($transactions as $transaction) {
+    $date = date('Y-m-d', strtotime($transaction['T_date']));
+    $amount = number_format($transaction['amount'], 2);
+    $table_html .= "<tr><td>$date</td><td> $amount</td></tr>";
+}
+$table_html .= '</table>';
+
+// Output the statement to the user
+echo "Bank statement for user $user_id:<br>";
+echo $table_html
+    
+    ?>
       </form>
     </div>
+
+   
 <!-- Scripts -->
 <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

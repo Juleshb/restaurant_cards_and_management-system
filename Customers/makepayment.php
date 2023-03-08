@@ -24,15 +24,27 @@ if ($conn->connect_error) {
   <body>
     <!-- HTML form -->
     <br><br><br><br>
-    <h2 id="animateHeading">Pay amount customer amount</h2>
+    <h2 id="animateHeading">chose kind of meal you want</h2>
     <div class="form-container" >
       <form id="contact-form" action="pay.php" method="post" onsubmit="return validateForm()">
         <div class="form-group">
         <label for="name">Customer ID:</label>
           
-        <select id="u_role" name="id">
+          <input
+            type="number"
+            id="phone"
+            name="id"
+            class="form-control"
+            value="<?php echo$id?>"/>
+            
+
+          <span class="error" id="phonelError"></span>
+        </div>
+         
+        <label for="name">Select amount:</label> 
+        <select id="u_role" name="amount">
         <?php 
-$sql = "SELECT * FROM `customers`";
+$sql = "SELECT * FROM `amount`";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -40,7 +52,7 @@ if (mysqli_num_rows($result) > 0) {
       
   
       ?>
-          <option value="<?php echo $row['customerID']?>"><?php echo $row['customerID']?></option>
+          <option value="<?php echo $row['amount']?>"><?php echo $row['amount']?></option>
           <?php 
       }
     } else {
@@ -48,18 +60,7 @@ if (mysqli_num_rows($result) > 0) {
     }
       ?>
           </select>
-          </div>
-
-        <div class="form-group">
-          <label for="email">Amount:</label>
-          <input
-            type="number"
-            id="phone"
-            name="amount"
-            class="form-control"/>
-
-          <span class="error" id="phonelError"></span>
-        </div>
+         
         
         
         <button type="submit">Pay</button>

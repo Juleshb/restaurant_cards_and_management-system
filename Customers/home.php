@@ -24,9 +24,10 @@ try {
 
 
 // Prepare a SELECT statement to retrieve the user's information
-$stmt = $conn->prepare("SELECT SUM(`amount`) FROM customeraccount;");
-$stmt2 = $conn->prepare("SELECT SUM(`amount`) FROM payment;");
-$stmt3 = $conn->prepare("SELECT SUM(`amount`) FROM transaction;");
+
+$stmt = $conn->prepare("SELECT SUM(`amount`) FROM customeraccount WHERE customerID=$id;");
+$stmt2 = $conn->prepare("SELECT SUM(`amount`) FROM payment WHERE customerID=$id;");
+$stmt3 = $conn->prepare("SELECT SUM(`amount`) FROM transaction WHERE customerID=$id;");
 
 
 // Execute the statement
@@ -38,7 +39,6 @@ $stmt3->execute();
 $Cash = $stmt->fetch(PDO::FETCH_ASSOC);
 $cashin = $stmt2->fetch(PDO::FETCH_ASSOC);
 $cashout = $stmt3->fetch(PDO::FETCH_ASSOC);
-
 
 ?>
 
@@ -53,7 +53,8 @@ $cashout = $stmt3->fetch(PDO::FETCH_ASSOC);
         </div>
         <div class="col-lg-6">
           <div class="section-heading">
-            <h2>Grow your website with our <em>SEO Tools</em> &amp; <span>Project</span> Management</h2>
+            <h2>Grow your website with our <em>SEO Tools</em> &amp; <span>Project</span> Management 
+            <div class="main-red-button-hover"><a href="makepayment.php">Pay fro Food</a></div></h2>
             <p>You can browse free HTML templates on Too CSS website. Visit the website and explore latest website templates for your projects.</p>
             <div class="row">
               <div class="col-lg-4">
@@ -89,7 +90,6 @@ $cashout = $stmt3->fetch(PDO::FETCH_ASSOC);
                     <div class="count-digit"><?php echo $Cash ['SUM(`amount`)']?></div>
                     <div class="count-title">Total Amount</div>
                     <p>Lorem ipsum dolor sitti amet, consectetur.</p>
-                  </div>
                 </div>
               </div>
             </div>

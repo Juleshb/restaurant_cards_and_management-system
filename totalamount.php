@@ -37,6 +37,8 @@ $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
   <body>
 
   
+
+  <br><br><br><br><br>
     <!-- HTML form -->
     <div class="form-container" >
       <form id="contact-form" method="post" >
@@ -64,9 +66,32 @@ $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
           />
           <span class="error" id="emailError"></span>
         </div>
-        
+        <?php 
+    
+    $user_id = $row['customerID'];
+$stmt = $conn->prepare("SELECT * FROM payment WHERE customerID = ?");
+$stmt->execute([$user_id]);
+$transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Format the transactions as a table
+$table_html = '<table>';
+$table_html .= '<tr><th>Date</th><th>Amount</th></tr>';
+foreach ($transactions as $transaction) {
+    $date = date('Y-m-d', strtotime($transaction['paymentDate']));
+    $amount = number_format($transaction['amount'], 2);
+    $table_html .= "<tr><td>$date</td><td> $amount</td></tr>";
+}
+$table_html .= '</table>';
+
+// Output the statement to the user
+echo "Bank statement for user $user_id:<br>";
+echo $table_html
+    
+    ?>
       </form>
     </div>
+
+   
 <!-- Scripts -->
 <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
