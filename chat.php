@@ -1,5 +1,3 @@
-
-
 <?php 
 
 include "nav.php";
@@ -31,22 +29,6 @@ if ($conn->connect_error) {
       margin: 0;
       padding: 0;
     }
-    .main-red-button-hover input {
-  display: inline-block;
-  background-color: #ff695f;
-  font-size: 15px;
-  font-weight: 400;
-  color: #fff;
-  text-transform: capitalize;
-  padding: 12px 25px;
-  border-radius: 23px;
-  letter-spacing: 0.25px;
-  transition: all .3s;
-}
-
-.main-red-button-hover input:hover {
-  background-color: #03a4ed;
-}
     
     /* Style the table */
     table {
@@ -85,10 +67,7 @@ if ($conn->connect_error) {
   <br>
   <br>
    <br>
-   <center>
-  <div class="main-red-button-hover" ><a href="register.php" >Add new customer</a></div> 
-  </center>
-  <br>
+   <a href="register.php"  >Add new customer</a>
 <div class="container">
   <table>
     <thead>
@@ -97,8 +76,8 @@ if ($conn->connect_error) {
         <th>Names</th>
         <th>Adress</th>
         <th>Phone</th>
-        <th>Email</th>
         <th>Registed date</th>
+        <th>Email</th>
         <th>options</th>
       </tr>
     </thead>
@@ -116,11 +95,11 @@ if (mysqli_num_rows($result) > 0) {
       <td><?php echo $row["customerID"] ?></td>
         <td><?php echo $row["names"] ?></td>
         <td><?php echo $row["address"] ?></td>
-        <td>+250<?php echo $row["phone"] ?></td>
+        <td><?php echo $row["phone"] ?></td>
         <td><?php echo $row["email"] ?></td>
         <td><?php echo $row["registedDate"] ?></td>
-        <td><form method="post" action="delete.php"><div class="main-red-button-hover" ><input type="hidden" name="id" value="<?php echo $row['customerID']?>"><input type="submit" value="Delete" ></div></form><br>
-        <form method="post" action="update.php"><div class="main-red-button-hover" ><input type="hidden" name="id" value="<?php echo $row['customerID']?>"><input type="submit" value="Update" ></div></form>
+        <td><form method="post" action="delete.php"><input type="hidden" name="id" value="<?php echo $row['customerID']?>"><input type="submit" value="Delete" ></form>
+        <form method="post" action="update.php"><input type="hidden" name="id" value="<?php echo $row['customerID']?>"><input type="submit" value="Update" ></form>
       </td>
       </tr>
       <?php 
