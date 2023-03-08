@@ -17,7 +17,7 @@ try {
 $stmt = $conn->prepare("SELECT * FROM customers WHERE customerID = :id");
 
 // bind the parameter values
-$stmt->bindParam(':id', $_POST['id']);
+$stmt->bindParam(':id', $id);
 
 $stmt->execute();
 

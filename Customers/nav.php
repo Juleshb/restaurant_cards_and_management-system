@@ -101,7 +101,7 @@ https://templatemo.com/tm-565-onix-digital
               <li class="scroll-to-section"><a href="totalamountin.php">Cash in</a></li>
               <li class="scroll-to-section"><a href="totalamountout.php">Cash Out</a></li>
               <li class="scroll-to-section"><a href="logout.php" class="logou">Logout</a></li> 
-              <li class="scroll-to-section"><div class="main-red-button-hover"><a href=""><?php echo  $_SESSION["Email"];?></a></div></li> 
+              <li class="scroll-to-section"><div class="main-red-button-hover"><a href="update.php"><?php echo  $_SESSION["Email"];?></a></div></li> 
               
             </ul>        
             <a class='menu-trigger'>

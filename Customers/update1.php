@@ -22,7 +22,7 @@ $id = $_POST['id'];
 $sql = "UPDATE `customers` SET`names`='$names', `phone`='$phone', `address`='$address', `email`='$email' WHERE `customers`.`customerID` =$id; ";
 
 if (mysqli_query($conn, $sql)) {
-    header("Location: customer.php");
+    header("Location: logout.php");
 } else {
     echo "Error updating record: " . mysqli_error($conn);
 }
