@@ -18,13 +18,80 @@ if ($conn->connect_error) {
 }
 
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Table Example</title>
+  <style>
+    /* Set default font size and margin/padding to 0 */
+    body {
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+    }
+    .main-red-button-hover input {
+  display: inline-block;
+  background-color: #ff695f;
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  text-transform: capitalize;
+  padding: 12px 25px;
+  border-radius: 23px;
+  letter-spacing: 0.25px;
+  transition: all .3s;
+}
+
+.main-red-button-hover input:hover {
+  background-color: #03a4ed;
+}
+    
+    /* Style the table */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    /* Style the table header */
+    th {
+      background-color: #f2f2f2;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    /* Style the table cells */
+    td {
+      border: 1px solid #ddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    /* Hide table cell content when screen is too small */
+    @media only screen and (max-width: 600px) {
+      td:nth-of-type(1):before { content: "Names: "; }
+      td:nth-of-type(2):before { content: "Adress: "; }
+      td:nth-of-type(3):before { content: "Phone: "; }
+      td:nth-of-type(4):before { content: "Registed date: "; }
+      td:nth-of-type(5):before { content: "Email: "; }
+      td:nth-of-type(6):before { content: "options: "; }
+    }
+  </style>
+</head>
+<body>
+
 <br>
 <br><br>
 <br>
 <br><br>
 <br>
 <br><br>
-<a href="makepayment.php"  >new Payment</a>
+<center>
+  <div class="main-red-button-hover" ><a href="makepayment.php"  >new Payment</a></div> 
+  <br>
+  </center>
+
 <div class="container">
 
 <table>

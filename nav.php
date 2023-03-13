@@ -9,6 +9,33 @@ if (!isset($_SESSION["Email"])) {
   exit;
 }
 
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "habarurema_jules_221003981";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$Email=$_SESSION["Email"];
+
+$sql = "SELECT * FROM `employer` WHERE Email='$Email'";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  while($row = mysqli_fetch_assoc($result)) {
+      
+    $user=$row["Names"];
+}
+} else {
+echo "0 results";
+}
+
 ?>
 
 <!DOCTYPE html>

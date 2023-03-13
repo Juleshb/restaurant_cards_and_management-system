@@ -16,7 +16,7 @@ if (isset($_POST["Email"]) && isset($_POST["Password"])) {
     $Email = $_POST["Email"];
     $Password = $_POST["Password"];
 
-    $sql = "SELECT * FROM employer WHERE Email='$Email' AND Password	='$Password'";
+    $sql = "SELECT * FROM employer WHERE Email='$Email' AND Pass	='$Password'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

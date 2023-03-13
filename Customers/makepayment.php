@@ -28,10 +28,8 @@ if ($conn->connect_error) {
     <div class="form-container" >
       <form id="contact-form" action="pay.php" method="post" onsubmit="return validateForm()">
         <div class="form-group">
-        <label for="name">Customer ID:</label>
           
-          <input
-            type="number"
+        <input type="hidden"
             id="phone"
             name="id"
             class="form-control"

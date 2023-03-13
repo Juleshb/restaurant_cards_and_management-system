@@ -61,9 +61,6 @@ echo "0 results";
     <link rel="stylesheet" href="assets/css/owl.css">
 <!--
 
-TemplateMo 565 Onix Digital
-
-https://templatemo.com/tm-565-onix-digital
 
 -->
   </head>

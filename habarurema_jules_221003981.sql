@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2023 at 06:42 PM
+-- Generation Time: Mar 13, 2023 at 09:53 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,24 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `habarurema_jules_221003981`
 --
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `employerDetails` ()   BEGIN
-    select * from employer;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getCarsDetails` ()   BEGIN
-    SELECT SUM(`amount`) FROM payment;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getCustomersDetail` ()   BEGIN
-    select * from customers;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -61,6 +43,27 @@ INSERT INTO `amount` (`amountId`, `amount`, `amountDescription`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customeraccount`
+--
+
+CREATE TABLE `customeraccount` (
+  `customerID` int(6) NOT NULL,
+  `amount` int(250) NOT NULL,
+  `ID` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customeraccount`
+--
+
+INSERT INTO `customeraccount` (`customerID`, `amount`, `ID`) VALUES
+(38, 29000, 6),
+(39, 37000, 7),
+(40, 10000, 8);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customers`
 --
 
@@ -70,20 +73,18 @@ CREATE TABLE `customers` (
   `phone` int(10) NOT NULL,
   `address` varchar(250) NOT NULL DEFAULT 'UR student',
   `registedDate` date NOT NULL DEFAULT current_timestamp(),
-  `email` varchar(100) NOT NULL,
-  `password` varchar(12) NOT NULL
+  `Email` varchar(100) NOT NULL,
+  `Password` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`customerID`, `names`, `phone`, `address`, `registedDate`, `email`, `password`) VALUES
-(1, 'HABARUREMA MUZIMA', 7222222, 'RUKARA', '2022-07-26', 'haba@gmail.com', 'Jules2020'),
-(14, 'MUKUNDWA JEAN', 782223273, 'RUKARA', '2022-12-07', 'kiki@gmail.com', 'k'),
-(15, 'GAKURU JC', 780020113, 'TABA', '2022-12-07', 'gakuru@gmail.com', 'gakuru'),
-(16, 'Bugingo Emmanuel', 789028283, 'KIGALI', '2022-12-07', 'emmy@gmail.com', 'k'),
-(18, 'hhhh', 5555555, 'huye', '2023-01-11', 'mimi', 'nini');
+INSERT INTO `customers` (`customerID`, `names`, `phone`, `address`, `registedDate`, `Email`, `Password`) VALUES
+(38, 'HABIMANA', 78252362, 'MUKINGO', '2023-03-08', 'habaruku@gmail.com', '123'),
+(39, 'Niyomugabo', 78958665, 'HUYE', '2023-03-09', 'niyo3@gmail.com', '123'),
+(40, 'HABARUREMA Jules', 787942019, 'Gg. Sumpah Pemuda No. 332', '2023-03-09', 'habaruremajules@gmail.com', '123');
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,7 @@ CREATE TABLE `employer` (
   `Names` varchar(250) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `Phone` int(250) NOT NULL,
-  `Password` varchar(250) NOT NULL,
+  `Pass` varchar(250) NOT NULL,
   `roleId` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -117,7 +118,7 @@ CREATE TABLE `employer` (
 -- Dumping data for table `employer`
 --
 
-INSERT INTO `employer` (`userID`, `Names`, `Email`, `Phone`, `Password`, `roleId`) VALUES
+INSERT INTO `employer` (`userID`, `Names`, `Email`, `Phone`, `Pass`, `roleId`) VALUES
 (1, 'Jules hb 250', 'habaruremajules@gmail.com', 789028283, 'kiki@2020', 1);
 
 -- --------------------------------------------------------
@@ -129,31 +130,18 @@ INSERT INTO `employer` (`userID`, `Names`, `Email`, `Phone`, `Password`, `roleId
 CREATE TABLE `payment` (
   `customerID` int(6) NOT NULL,
   `amount` int(6) NOT NULL,
-  `paymentDate` date NOT NULL DEFAULT current_timestamp()
+  `paymentDate` date NOT NULL DEFAULT current_timestamp(),
+  `PaymentID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`customerID`, `amount`, `paymentDate`) VALUES
-(14, 60000, '2022-12-07'),
-(15, 30000, '2022-12-07'),
-(16, 80000, '2022-12-07'),
-(16, 60000, '2022-12-07'),
-(16, 40000, '2022-12-07'),
-(16, 50000, '2022-12-07'),
-(18, 1000, '2023-02-16');
-
---
--- Triggers `payment`
---
-DELIMITER $$
-CREATE TRIGGER `AfterDelete` AFTER DELETE ON `payment` FOR EACH ROW BEGIN  
-DELETE FROM customers WHERE customers.customerID=payment.customerID;
-END
-$$
-DELIMITER ;
+INSERT INTO `payment` (`customerID`, `amount`, `paymentDate`, `PaymentID`) VALUES
+(38, 30000, '2023-03-08', 21),
+(39, 40000, '2023-03-09', 22),
+(40, 10000, '2023-03-09', 23);
 
 -- --------------------------------------------------------
 
@@ -245,11 +233,35 @@ CREATE TABLE `totalamount` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `customerID` int(100) NOT NULL,
+  `amount` int(250) NOT NULL,
+  `T_date` date NOT NULL DEFAULT current_timestamp(),
+  `description` varchar(250) NOT NULL DEFAULT 'Payment',
+  `transaction_id` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`customerID`, `amount`, `T_date`, `description`, `transaction_id`) VALUES
+(38, 1000, '2023-03-08', 'Payment', 3),
+(39, 1000, '2023-03-09', 'Payment', 4),
+(39, 1000, '2023-03-09', 'Payment', 5),
+(39, 1000, '2023-03-09', 'Payment', 6);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `customerspaid`
 --
 DROP TABLE IF EXISTS `customerspaid`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customerspaid`  AS SELECT `customers`.`customerID` AS `customerID`, `customers`.`names` AS `names`, `customers`.`email` AS `email`, `payment`.`amount` AS `amount` FROM (`customers` join `payment` on(`customers`.`customerID` = `payment`.`customerID`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customerspaid`  AS SELECT `customers`.`customerID` AS `customerID`, `customers`.`names` AS `names`, `customers`.`Email` AS `email`, `payment`.`amount` AS `amount` FROM (`customers` join `payment` on(`customers`.`customerID` = `payment`.`customerID`))  ;
 
 -- --------------------------------------------------------
 
@@ -271,6 +283,13 @@ ALTER TABLE `amount`
   ADD PRIMARY KEY (`amountId`);
 
 --
+-- Indexes for table `customeraccount`
+--
+ALTER TABLE `customeraccount`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `Customeraccount_ibfk_1` (`customerID`);
+
+--
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
@@ -287,6 +306,7 @@ ALTER TABLE `employer`
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
+  ADD PRIMARY KEY (`PaymentID`),
   ADD KEY `Payment_ibfk_1` (`customerID`);
 
 --
@@ -316,6 +336,13 @@ ALTER TABLE `roles and permissions`
   ADD KEY `Roles and Permission_ibfk_1` (`roleId`);
 
 --
+-- Indexes for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD KEY `Transaction_ibfk_1` (`customerID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -326,16 +353,28 @@ ALTER TABLE `amount`
   MODIFY `amountId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `customeraccount`
+--
+ALTER TABLE `customeraccount`
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `employer`
 --
 ALTER TABLE `employer`
   MODIFY `userID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -350,8 +389,20 @@ ALTER TABLE `roles`
   MODIFY `roleId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `transaction_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `customeraccount`
+--
+ALTER TABLE `customeraccount`
+  ADD CONSTRAINT `Customeraccount_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`);
 
 --
 -- Constraints for table `employer`
@@ -378,6 +429,12 @@ ALTER TABLE `reservation`
 ALTER TABLE `roles and permissions`
   ADD CONSTRAINT `Roles and Permission_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roles` (`roleId`),
   ADD CONSTRAINT `Roles and Permissions_ibfk_1` FOREIGN KEY (`permissionId`) REFERENCES `permissions` (`permissionId`);
+
+--
+-- Constraints for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD CONSTRAINT `Transaction_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
